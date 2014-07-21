@@ -1,0 +1,953 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+%\setbeamercovered{transparent}
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{pgf,pgfarrows,pgfnodes}
+%\usepackage{tikz}
+\usepackage{algorithm,algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+%\newtheorem{theorem}{Theorem}[section]
+%\usepackage{algorithm2e}
+%\usetikzlibrary{arrows,shapes,trees}
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[]{Object Recognition in the Framework of Sensorimotor Approaches} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Li ZHONG} % Your name
+\institute[\'Ecole Polytechnique] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+Aldebaran Robotics \\ % Your institution for the title page
+\medskip
+%\textit{lzhong@aldebaran-robotics.com} % Your email address
+}
+%\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+%------------------------------------------------
+%------------------------------------------------
+
+
+
+\section{Introduction} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an 
+
+\subsection{Motivation}
+\begin{frame}
+\frametitle{Comparison}
+
+
+
+Traditional robotics/AI approaches:
+\begin{itemize}
+\item Pros:
+		\begin{itemize}
+		\item hot topics (e.g. deep learning), received a lot of attention 
+		\item mature solutions for specific tasks (e.g. face recognition)
+		\item better computation/storage ability than human (e.g. chess competition)
+		\end{itemize}
+\item Cons:
+		\begin{itemize}
+		\item	priori is given to interpret data
+		\item	pre-set models/algorithms/rules/parameters 
+		\item	lack the generalizing ability \note{does Google DeepMind really "invented the concept of a cat" \footnote{said by Jeff Dean}?}
+		\end{itemize}
+\end{itemize}
+
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Comparison}
+Sensorimotor approaches:
+\begin{itemize}
+\item Pros:
+		\begin{itemize}
+		\item no priori, let the robot has its own perception
+		\item generalizing ability 
+		\item cumulative learning, evolutionary learning
+		\end{itemize}
+\item Cons:
+		\begin{itemize}
+		\item pretty young, not so many applications
+		\item obviously will not out performance the state-of-the-art methods in specific tasks \note{you can't really compare a baby with a professional cleaning robot in terms of who can do cleaning better?}
+		\item have no idea whether it would eventually lead to genuine intelligence \note{at least worth trying}
+		\end{itemize}
+\end{itemize}
+
+
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Examples}
+For example, let us consider the object recognition task.
+\\~\\
+
+
+Traditional methods:\\ 
+extract regularities in sensory structure/data flow 
+\note{Unsupervised methods do pretty well. But what does the object mean to the machine/agent/robot? Well, not really any meaningful things to the robot. }
+\\~\\
+
+
+Sensorimotor theory:\\
+extract regularities in sensory-motor relations/interactions
+\note{However, sensorimotor theory tells another story. No external world for robots, everything is just its internal representation within sensor/motor space. What object recognition means to the robot is that it has to build up an internal representation, or to perceive, of an object through learning/exploration, then match the new representation/perception.}
+
+
+\end{frame}
+
+
+
+%------end adding
+
+%------------------------------------------------
+
+ % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+
+\subsection{Sensorimotor Contingency Theory} %Section - 1.2
+\begin{frame}
+\frametitle{Sensorimotor Contingency Theory}
+
+
+The Sensorimotor Contingency Theory (SMCT) posits that perception and action are joined according to the following condition:
+\begin{itemize}
+%\item the perceptual apparatus is tuned to extract regularities (invariants) from the environment, and
+\item changes in the way those regularities are received by the perceptual apparatus in relation to actions follow structured laws peculiar to a particular sense modality.
+\end{itemize}
+
+
+The perception, in terms of sensorimotor approaches, means knowing what would happen if some certain motor commands have been executed. 
+
+\end{frame}
+
+
+\subsection{Perception} %Section - 1.2
+\begin{frame}
+\frametitle{Perceive an object}
+Consider an example: 
+\\~\\
+
+
+The children’s game in which a household object like a cork, a potato, or a pencil sharpener, 
+for example, is put in an opaque bag, and the child must attempt to identify the object by feeling it with his hand in the bag. 
+\note{The interesting part of the game is that before touching the object, you just have historical, discrete sensory experience of local features for each objects, like shape, edges, textures, smoothness, etc. However after the touch action, the previously unrelated parts come together into a whole. The collection sensory experiences of incomprehensible protuberances, smoothnesses, now could form an impression of the object. That is to say, that you perceive the object (a cork, potato, or pencil) is equivalent to the knowledge of the sensory information (shapes, edges, smoothness, etc.) (which you already learned) if you would do certain actions (touch).}   
+
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Perceive a line}
+
+
+\note{The picture shows that even if the sensory input changes a lot when the eye moves, we still perceive it as the same line. \textbf{Top}: The eye fixates the middle of a straight line and
+then moves to a point above the line. \textbf{Bottom left}: Flattened out retina showing great arc corresponding to equator (straight line) and off-equator great arc (curved line). Triangles symbolize color sensitive cone photo receptors, discs represent rod photo receptors. Size of photo receptors increases with eccentricity from the center of the retina. \textbf{Bottom right}: Cortical activation corresponding to stimulation by the two lines, showing how activation corresponding to a directly fixated straight line (large central oblong packet tapering off to wards its ends) distorts into a thinner, banana shaped region, sampled mainly by rods, when the eye moves upwards.}
+
+\note{Applying sensorimotor approaches, a line can be defined as a set of sensorimotor relations: it is an experience such that a subset of the sensory input doesn’t change when a specific motor action is performed (along the line) but changes a lot for other actions (see Fig~\ref{fig:1.2}).  The connotative principal is that the brain would pay more attention to the specific actions (e.g., along the line moving in the example) since it is a compressed representation of the external object. Note that this definition can be applied to any modality. The most natural in this case is vision but it also applies, for example, to touch if you move your finger on a linear edge. This is a important notion in the sensorimotor theory: perception is code-independent because it is actually based on the properties of our sensorimotor interaction with the world and not on the way the interaction is coded.}
+
+
+\begin{figure}[htbp!] 
+\centering    
+\includegraphics[width=.4\textwidth]{Chapter1/Figs/2}
+% \caption{}
+\label{fig:1.2}
+\end{figure}
+
+Another example is to perceive a line, what does this line mean to your brain? 
+
+
+\end{frame}
+
+
+%---------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------
+\section{Framework}
+%---------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Main Idea}
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{What does object recognition mean to robots?}
+
+An object \note{rigid structure} is a subset of sensorimotor experience \note{the motor action is intrinsically related with sensory information} which is invariant to displacement.
+
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Explore the object
+\item Build up internal representation
+\item Match the representation \note{this is perceiving, after exploration}
+\end{itemize}
+
+We firstly tackle this object recognition through shape recognition.
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{How to explore}
+
+\begin{figure}
+\centering    
+\includegraphics[width=0.6\textwidth]{Chapter2/Figs/Szakkad}
+\caption{The saccading process. Human eyes will move very rapidly from one place to another, in order to obtain more information.}
+\label{fig:2.4}
+\end{figure}%
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{How to perceive}
+
+The human eye-movement inspires us to simulate the saccading process for shape perceiving. 
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Simulation of Objection Recognition}
+\begin{itemize}
+\item Construct foveal vision \note{the raw visual sensory input of a robot is usually a normal image captured by the embedded cameras. It is necessary to convert into the log-polar form that similar to foveal vision in order to motivate the robot do saccading.}
+\item Extract salient points \note{currently we are only interested in the shape of an object and saliency points are sufficient to determine the shape.}
+\item Saccade \note{the saccading process is the major simulation which bridges between the motor commands and external objects.}
+\item Match motor commands \note{this is the recognition part. After the robot has learned an object (coded the corresponding motor commands), to recognize an unknown object, the robot only has to match the newly commands in the motor space.}
+\end{itemize}
+\end{frame}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Foveal Vision}
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\begin{frame}
+\frametitle{What is foveal vision?}
+\begin{figure}
+  \centering
+  \subfloat{\label{fig:TomJerry}\includegraphics[width=0.3\textwidth]{Chapter2/Figs/mug2}}                
+  \subfloat{\label{fig:WallE}\includegraphics[width=0.3\textwidth]{Chapter2/Figs/mug2logpolar}}
+  \caption{Left is the original object, right is its projection in foveal vision.}
+  \label{fig:2.2}
+\end{figure}
+
+\note{Because of the characters of foveal vision, e.g., high resolution in the center, and resolution decreases rapidly outside the center, the robot would be motivated to move the "eye" since in each image it can only obtain partial information at the center, and in order to collect as much as possible information (to recognize the object), the robot has to move the "eye" to the center of another log-polar form image. And this will generate certain motor commands which are corresponding to certain objects.}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{What is foveal vision?}
+The characteristic of foveal vision:
+\begin{itemize}
+\item high resolution in the center
+\item low resolution along the edge
+\end{itemize}
+
+\\~\\
+In practice we use log-polar system to transform normal images into foveal vision images.
+\end{frame}
+
+\begin{frame}
+\frametitle{Log-polar coordinates}
+
+\begin{equation}
+ r = e^\rho .
+ \end{equation}
+where  $r$  is the distance to the origin. 
+\\~\\
+The formulas for transformation from Cartesian coordinates to log-polar coordinates are given by:
+\begin{equation}
+\begin{split} 
+\rho = \log\sqrt{ x^2 + y^2}, \\ 
+\theta = \arctan y/x.
+\end{split}
+\end{equation}
+\end{frame}
+
+% \begin{frame}
+% \frametitle{Why foveal vision?}
+% Because of the characters of foveal vision, e.g., high resolution in the center, and resolution decreases rapidly outside the center, the robot would be motivated to move the "eye" since in each image it can only obtain partial information at the center, and in order to collect as much as possible information (to recognize the object), the robot has to move the "eye" to the center of another log-polar form image. And this will generate certain motor commands which are corresponding to certain objects.
+% \end{frame}
+
+
+
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Saliency Points Extraction}
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Saliency points}
+
+Saliency points, in our case, are the information output of a certain sensor.
+\note{Since currently we conduct object recognition merely through shape, thus saliency points are enough to determine the shape.}
+% A shape is perceived as a certain sequence of motor commands to robots in terms of sensorimotor approaches.
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Extraction}
+
+\begin{figure}
+  \centering
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter2/Figs/1}}                
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter2/Figs/3}}
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter2/Figs/2}}
+  \caption{Corner detector (left), edge detector (middle) and SIFT (right).}
+  \label{fig:2.5}
+\end{figure}
+
+There many methods for keypoints extraction. However since we are focusing on shape/location, Corner detection is more suitable. 
+
+\end{frame}
+
+
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Saccading Process}
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Saccade}
+Saccading process for object recognition.
+\begin{figure}
+\centering    
+\includegraphics[width=0.4\textwidth]{image003}
+%\caption{The saccading process. Human eyes will move very rapidly from one place to another, in order to obtain more information.}
+\label{fig:2.5}
+\end{figure}%
+
+
+\note{After extracted keypoints from the object, the idea of saccade is moving the "eye" point-by-point, obtaining a foveal vision in each keypoint, collecting the information and stopping saccading when the information is enough to recognize the object.}
+
+
+This part is currently under developing of other member.
+\end{frame}
+
+
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Shape Matching}
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Record motor commands}
+In learning part, every object is coded in certain motor commands corresponding to saccading process.
+\\~\\
+Thus:\\
+shape matching $\to$ motor commands matching $\to$ coordinates matching in motor space
+
+\note{talk about different space metrics}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Original plan}
+\begin{itemize}
+\item Construct foveal vision%: the raw visual sensory input of a robot is usually a normal image captured by the embedded cameras. It is necessary to convert into the log-polar form that similar to foveal vision in order to motivate the robot do saccading.
+\item Extract salient points%: currently we are only interested in the shape of an object and saliency points are sufficient to determine the shape.
+\item Saccade%: the saccading process is the major simulation which bridges between the motor commands and external objects.
+\item Match motor commands%: this is the recognition part. After the robot has learned an object (coded the corresponding motor commands), to recognize an unknown object, the robot only has to match the newly commands in the motor space.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Actual work}
+Since saccading module is temporary not available, we implement a short-cut way for the original idea.\\
+
+\begin{itemize}
+\item Foveal vision:\\	
+Skipped.
+\item Saliency points extraction:\\
+We extract keypoints directly from ordinary images.
+\item Saccade:\\
+Not available.
+\item Matching motor commands:\\
+As intended. \note{Matching coordinates of keypoints instead.} 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Coordinates matching}
+We use the direct planar methods for coordinates matching.\\
+
+The idea of directly matching is straightforward. We try to build a projective transform 
+\begin{equation}
+H =
+\begin{bmatrix}
+h_{11} & h_{12} & h_{13}\\
+h_{21} & h_{22} & h_{23}\\
+h_{31} & h_{32} & 1
+\end{bmatrix}
+\end{equation},
+where $H(p)$ is the projection of a point $p$, and intuitively the objective function should be like:
+\begin{equation}
+\Gamma(H:P,Q) = \sum_{j=1}^{l} \min_{i=1,...,k} |q_j - H(p_i)|^2
+\end{equation}
+Where $P,Q$ are two set of points (of coordinates).
+
+\note{talk about why try this trival methods, 8d to 2d}
+\end{frame}
+
+\begin{frame}
+Assuming $k = l$, $q_i = H(pi)$, $p = [p_x, p_y]; q = [q_x, q_y]$), then
+
+\begin{equation}
+q_x =
+\frac{h_{11}p_x + h_{12}p_y + h_{13}}{h_{31}p_x + h_{32}p_y + 1}, ~
+q_y =
+\frac{h_{21}p_x + h_{22}p_y + h_{23}}
+{h_{31}p_x + h_{32}p_y + 1}
+\end{equation}
+
+For a fixed pair of $(h_{31}, h_{32})$, the above formulas become
+\begin{equation}
+q_i = \frac{1}{\alpha_i}A p_i + \frac{1}{\alpha_i}t
+\end{equation}
+
+where 
+\begin{equation}
+A =
+\begin{bmatrix}
+h_{11} & h_{12}\\
+h_{21} & h_{22} 
+\end{bmatrix},~
+t =
+\begin{bmatrix}
+h_{13}\\
+h_{23}
+\end{bmatrix}
+\end{equation}
+\end{frame}
+
+\begin{frame}
+\frametitle{Theorem 1}
+$P,Q$ are the sets of points in $\mathbb{R}^2$ related by a homograph. There exists coordinates transform
+\begin{equation}
+p_i \to \hat{p_i}, q_i \to \hat{q_i}
+\end{equation}
+and a vector $t$, a matrix $E$, a diagonal matrix $D$ and constants $\beta_1,...,\beta_k$ determined entirely by $P,Q$ such that the new sets of transformed points $\hat{P},\hat{Q}$
+are rated by the following transform
+\begin{equation}
+\hat{q_i} = A\hat{p_i} + \beta_i t
+\end{equation}
+where matrix $A$ satieties the following equation
+\begin{equation}
+ADA^T + AE + E^TA^T + t^T = \mathbb{I}_{2\times2}.
+\end{equation}
+\end{frame}
+
+\begin{frame}
+\frametitle{Theorem 2}
+\small
+The components of matrix $A = \begin{bmatrix} a & b \\ c & d\end{bmatrix}$ are determined by the matrices $E,D,T=tt^T$ and $\theta, \hat{\theta}$
+\begin{equation}
+\begin{split}
+& a = \frac{rP\cos\theta - E}{r}, b = \frac{sP\sin\theta - F}{s}\\
+& c = \frac{rP\cos\hat{\theta} - G}{r}, d = \frac{sP\sin\hat{\theta} - H}{s}
+\end{split}
+\end{equation}
+where 
+\begin{equation}
+E = 
+\begin{bmatrix} 
+E & G \\ F & H
+\end{bmatrix},
+T = 
+\begin{bmatrix} 
+R & T \\ T & S
+\end{bmatrix}
+D = 
+\begin{bmatrix} 
+\sqrt{r} & 0 \\  & \sqrt{s}
+\end{bmatrix}
+\end{equation}
+and 
+\begin{equation}
+\begin{split}
+& P = 1 - R + {E^2 \over r} + {F^2 \over s},
+Q = 1 - S + {G^2 \over r} + {H^2 \over s} \\
+& \cos(\theta-\hat{\theta}) =  \frac{{GE \over r} + {FH \over s} - T}{PQ}
+\end{split}
+\end{equation}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Algorithm}
+
+\begin{algorithm}[H]
+\begin{algorithmic}
+\REQUIRE{two set of 2D points $P = \{p_1,...,p_n\}$, $Q = \{q_1,...,q_n\}$.}
+\LOOP
+\STATE fix certain values of pair $(h_{31},h_{32})$ and angle $\theta$.
+\STATE calculate the matrices $E,D,T=tt^T$ and constants $\beta_1,...,\beta_k$.
+\STATE calculate matrix $A$ according to Theorem 2.
+\STATE obtain the transformation equation in Theorem 1.
+\STATE recover the project matrix $H$ based on $A$ and pair $(h_{31},h_{32})$.
+\STATE calculate the cost function (Equation 4), update the current optimal solution.
+\ENDLOOP
+\ENSURE{projective matrix $H$ which minimize the cost function.}
+\end{algorithmic}
+\caption{Planar matching algorithm}
+\label{alg:seq}
+\end{algorithm}
+
+
+\end{frame}
+
+
+%---------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------
+\section{Experiments}
+%---------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Adjustment}
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Original plan}
+\begin{itemize}
+\item Construct foveal vision%: the raw visual sensory input of a robot is usually a normal image captured by the embedded cameras. It is necessary to convert into the log-polar form that similar to foveal vision in order to motivate the robot do saccading.
+\item Extract salient points%: currently we are only interested in the shape of an object and saliency points are sufficient to determine the shape.
+\item Saccade%: the saccading process is the major simulation which bridges between the motor commands and external objects.
+\item Match motor commands%: this is the recognition part. After the robot has learned an object (coded the corresponding motor commands), to recognize an unknown object, the robot only has to match the newly commands in the motor space.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Actual work}
+Since Saccading module is temporary not available, we implement a short-cut way for the original idea.\\
+
+\begin{itemize}
+\item Foveal vision:\\	
+Skipped.
+\item Saliency points extraction:\\
+We extract keypoints directly from ordinary images.
+\item Saccade:\\
+Not available.
+\item Matching motor commands:\\
+As intended. \note{Matching coordinates of keypoints instead. }
+\end{itemize}
+\end{frame}
+
+
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Matching Results}
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Direct Matching Results}
+\begin{figure}
+\centering    
+\includegraphics[width=1.0\textwidth]{Chapter2/Figs/4}
+\caption{Projective transformation. $P,Q$ are the two sets, and $H(P)$ is the new sets under projective transformation.}
+\label{fig:2.7}
+\end{figure}%
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Limitations}
+\begin{itemize}
+\item Sensitive to noise, lightning changes
+\item Need to extract/saccade/store all keypoints
+\item Not efficient in real-time computation (O($N^2$) complexity) 
+\end{itemize}
+\end{frame}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Improvements}
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Gaussian Mixture Models}
+\begin{itemize}
+\item Probabilistic representations, robust to noise and lightning changes
+\item Capable to match with just few points
+\item Much efficient in on-line storage/computation 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Gaussian Mixture Models}
+Consider a Gaussian mixture model with $m$ components where observations $\{x_1,...,x_n\}$ are independently and identically distributed with the density
+\begin{equation}
+\begin{split}
+& p(x;a_k,S_k, \pi _k) =  \sum _{k=1}^{m} \pi _kp_k(x),  \quad \pi _k  \geq 0,  \quad \sum _{k=1}^{m} \pi _k=1,\\
+& p_k(x)= \varphi (x;a_k,S_k)= \frac{1}{(2\pi)^{d/2}\mid{S_k}\mid^{1/2}} exp \left \{ - \frac{1}{2} (x-a_k)^TS_k^{-1}(x-a_k) \right \} ,
+\end{split}
+\end{equation}
+where $p_k$ is the normal density with mean $a_k$ and covariance matrix $S_k$ and $\pi_k$ is the weight of k-th component.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{EM algorithm}
+We can use EM (Expectation-Maximization) algorithm estimate the parameters of the Gaussian mixtures. \\%The EM algorithm is an iterative procedure. Each iteration includes two steps. At the first step (Expectation step or E-step), you find a probability $p_{i,k}$ (denoted $\alpha_{i,k}$ in the formula below) of sample $i$ to belong to component $k$ using the currently available mixture parameter estimates:
+E-Step:
+\begin{equation}
+\alpha _{ki} =  \frac{\pi_k\varphi(x;a_k,S_k)}{\sum\limits_{j=1}^{m}\pi_j\varphi(x;a_j,S_j)} .
+\end{equation}
+
+
+%At the second step (Maximization step or M-step), the mixture parameter estimates are refined using the computed probabilities:
+M-Step:
+\begin{equation}
+\pi _k= \frac{1}{N} \sum _{i=1}^{N} \alpha _{ki},  \quad a_k= \frac{\sum\limits_{i=1}^{N}\alpha_{ki}x_i}{\sum\limits_{i=1}^{N}\alpha_{ki}} ,  \quad S_k= \frac{\sum\limits_{i=1}^{N}\alpha_{ki}(x_i-a_k)(x_i-a_k)^T}{\sum\limits_{i=1}^{N}\alpha_{ki}}
+\end{equation}
+\end{frame}
+
+\begin{frame}
+\frametitle{EM algorithm}
+\begin{algorithm}[H]
+\begin{algorithmic}[1]
+  \REQUIRE observations $x=\{x_1,...,x_n\}$, initial estimation of parameters $(a_k,S_k,\pi_k)_{\forall k}$.
+  \LOOP 
+  \STATE E-Step: calculate the belonging probabilities $\alpha_{ki}$ between sample $i$ and component $k$ based on Equation 15.
+  \STATE M-Step: update the estimations of parameters $(a_k,S_k,\pi_k)_{\forall k}$ based on Equation 16.  
+  \ENDLOOP
+\end{algorithmic}
+\caption{EM algorithm}
+\end{algorithm}
+\end{frame}
+
+% \begin{frame}
+% \frametitle{Bayesian Information Criterion}
+% Giving the number of components, we can estimate the parameters by EM algorithm. However, generally in our case the number of components is totally unknown and no prior knowledge for the robot is available to determine the number. Therefore we use BIC for choosing the best number. \\
+
+% The idea of BIC is derived as an approximation to twice the log integrated likelihood using the Laplace method. 
+
+% \end{frame}
+
+\begin{frame}
+\frametitle{Bayesian Information Criterion}
+The BIC (Bayesian Information Criterion) based on integrated likelihood for mixture models is defined as
+\begin{equation}
+\mathrm{BIC}(G) = 2p(x|\hat{\pi},G)- \tau \log(n),
+\end{equation}
+where $\tau$ is the number of free parameters in the mixture models.
+
+If we consider Gaussian models, then Equation 3.5 could rewrite as 
+\begin{equation}
+\mathrm{BIC}(G_{i}) = -\frac{1}{2} N_{i} log(\vert S_{i}\vert) - \frac{N_i}{2} d(1 + \log(2\pi)) - \tau \frac{1}{2} \log(N_{i})
+\end{equation}
+where $N_i$ is the number of data points that fall into $G_i$ component.
+
+\note{talk about why BIC}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{GMM representations}
+\begin{figure}
+  \centering
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/56}}                
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/159}}
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/25}}
+
+  \subfloat{\includegraphics[width=0.29\textwidth]{Chapter3/Figs/56_l5c3}}
+  \subfloat{\includegraphics[width=0.29\textwidth]{Chapter3/Figs/159_l5c3}}                
+  \subfloat{\includegraphics[width=0.29\textwidth]{Chapter3/Figs/25_l5c3}}
+  % \subfloat{\includegraphics[width=0.25\textwidth]{Chapter3/Figs/56}}
+  % \subfloat{\includegraphics[width=0.25\textwidth]{Chapter3/Figs/741}}
+  
+  \caption{Several examples of the Gaussian mixture representation of an object. For each mixture, only means, covariance matrices, and weights need to be stored.}
+  \label{fig:3.3}
+\end{figure}   
+\end{frame}
+
+
+\begin{frame}
+\setbeamercolor{normal text}{fg=gray,bg=}
+\setbeamercolor{alerted text}{fg=black,bg=}
+\usebeamercolor{normal text}
+
+\frametitle{Limitations}
+\begin{itemize}
+\item \alert<+>{Sensitive to noise, lightning changes}
+\item Need to extract/saccade/store all keypoints
+\item Not efficient in real-time computation (O($N^2$) complexity) 
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Shape matching}
+The Mahalanobis distance of a point $x = ( x_1, x_2, x_3, \dots, x_N )^T$ in $\mathbb{R}^N$ from a group of Gaussian with mean $\mu = ( \mu_1, \mu_2, \mu_3, \dots , \mu_N )^T$ and covariance matrix $S$ is defined as
+\begin{equation}
+D_G(x) = \sqrt{(x - \mu)^T S^{-1} (x-\mu)}. 
+\end{equation}
+
+In our case, $N=2$.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Shape matching}
+Suppose we have the set of points $T=\{t_1,t_2,...,t_p\}$, where $p$ is the number of points. There are $q$ mixtures in the collection, each mixture $M_k$ contains mean $\mu_k = \{\mu_{k_1},...,\mu_{k_{n_k}}\}$, covariance matrices $S_k = \{S_{k_1},...,S_{k_{n_k}} \}$ and weights $W_k=\{w_{k_1},...,w_{k_{n_k}} \}$. Then the objective function of shape matching is 
+\begin{equation}
+\begin{split}
+& \mathrm{argmin}_{k=1,..q}  \sum_{i=1}^{p} w_{k_j} D_{G_{k_j}}(t_i),\\
+& where \quad k_j = \mathrm{argmin}_{k_j=k_1,...,k_{n_k}} D_{G_{k_j}}(t_i)
+\end{split}
+\end{equation}
+\end{frame}
+
+\begin{frame}
+\frametitle{Shape matching}
+\begin{table}
+\begin{center}
+  \begin{tabular}{ l | c | r }
+    \hline
+     & Direct Planar & GMM \\ \hline
+    
+    Objects under \\ same lightning condition & 87.3 & 91.4 \\ \hline
+    Objects under \\ different lightning conditions & 73.3 & 90.6 \\ 
+    \hline
+  \end{tabular}
+\end{center}
+\caption{The performance of GMM and Direct Planar method. }
+\label{t:3}
+\end{table}
+\end{frame}
+
+
+\begin{frame}
+\setbeamercolor{normal text}{fg=gray,bg=}
+\setbeamercolor{alerted text}{fg=black,bg=}
+\usebeamercolor{normal text}
+\frametitle{Limitations}
+\begin{itemize}
+\item Sensitive to noise, lightning changes
+\item \alert<+>{Need to extract/saccade/store all keypoints}
+\item Not efficient in real-time computation (O($N^2$) complexity) 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Point-by-point matching}
+The KLD (Kullback-Leibler divergence) for continuous distributions $P$ and $Q$ is defined as 
+\begin{equation}
+\mathrm{D_{KL}}(P\|Q) = \int_{-\infty}^\infty \ln (\frac{p(x)}{q(x)}) p(x) \mathrm{d}x
+\end{equation}
+where $p$ and $q$ are densities of $P$ and $Q$. If $P$ and $Q$ are both multivariate normal distributions of dimension $d$, then KLD could be written as
+\begin{equation}
+\begin{split}
+\mathrm{D_{KL}}(P \| Q) = & { 1 \over 2 } \left( \mathrm{tr} \left( S_1^{-1} S_0 \right) + \left( \mu_1 - \mu_0\right)^\top S_1^{-1} ( \mu_1 - \mu_0 ) \\
+&- d - \ln \left( { \det S_0 \over \det S_1  } \right)  \right).
+\end{split}
+\end{equation}
+where $(\mu_i,S_i)_{i=0,1}$ are the corresponding mean and covariance matrix.\\
+\end{frame}
+
+\begin{frame}
+\frametitle{Point-by-point matching}
+The distance between a Gaussian component $G$ and a mixture $M$ is defined as
+\begin{equation}
+d_{GM} = \sum_{i=1}^k w_i \mathrm{D_{KL}}(G\|G_i)
+\end{equation}
+where $k$ is the number of Gaussian components in $M$, and $w_i,G_i$ are the corresponding weight and distribution of component $i$, and $\mathrm{D_{KL}}$ is the Kullback-Leibler divergence defined in Equation 22.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Point-by-point algorithm}
+\begin{algorithm}[H]
+\begin{algorithmic}[1]
+  \REQUIRE Gaussian mixtures $M_1,...,M_q$, starting point $p$.
+  \LOOP 
+  \STATE calculate the matching probabilities between $T$ and all the mixtures $M_1,...,M_q$, rank the mixtures based on (GMM) Shape matching methods.
+  \STATE select the mixture on the top of ranking, choose one Gaussian component for querying based on Equation 23.
+  \STATE search saccading points on the selected query region, if any new points found, add to $T$, continue choosing the next Gaussian component in the same mixture, else put the current mixture to the bottom of ranking, go to step 1
+  \ENDLOOP
+\end{algorithmic}
+\caption{Point-matching algorithm}
+\end{algorithm}
+\end{frame}
+
+
+\begin{frame}
+Here is the execution process of our algorithm.
+
+\begin{figure}
+  \centering
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/1}}       
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/11}}       
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/figure_2}}
+  \caption{The left figure shows all Gaussian components in 15 mixtures (each mixture has a unique color). The middle figure shows the starting point (denoted with "*") and next query region (denoted with "+"), the current selected mixture (plotted in full ellipse while other mixtures only plotted in edges). From the two pictures on the right we can see the search on the first two mixtures fail, unable to discover new points.}
+
+\end{figure}   
+\end{frame}
+
+
+\begin{frame}
+\begin{figure}
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/figure_3}}
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/figure_4}}                
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/figure_5}}
+  \caption{Then we turn to third mixture (left figure). And we find a new point in estimated region (middle figure). Continue searching another Gaussian components in the same mixture.}
+
+\end{figure}   
+\end{frame}
+
+
+\begin{frame}
+\begin{figure}
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/figure_6}}
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/figure_7}}                
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/figure_8}}
+  \caption{Then we turn to another mixture, repeat the process in the iteration.}
+
+\end{figure}   
+\end{frame}
+
+
+\begin{frame}
+\begin{figure}
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/figure_9}}
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/2}}                
+  \subfloat{\includegraphics[width=0.3\textwidth]{Chapter3/Figs/111}}
+  \caption{We find more and more points in this mixture. The ranking score is about to converge. We stop the iteration and output the result: this mixture has 85\% matching probability.}
+
+\end{figure}   
+\end{frame}
+
+
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Conclusion}
+%---------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}
+
+\begin{itemize}
+\item Construct foveal vision%: the raw visual sensory input of a robot is usually a normal image captured by the embedded cameras. It is necessary to convert into the log-polar form that similar to foveal vision in order to motivate the robot do saccading.
+\item Extract salient points%: currently we are only interested in the shape of an object and saliency points are sufficient to determine the shape.
+\item Saccade%: the saccading process is the major simulation which bridges between the motor commands and external objects.
+\item Match motor commands%: this is the recognition part. After the robot has learned an object (coded the corresponding motor commands), to recognize an unknown object, the robot only has to match the newly commands in the motor space.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Future work}
+\begin{itemize}
+\item Considering more complex background
+\item Extending shape matching to be invariant to scaling, rotation and translation
+\item Adding more sensory input (e.g. texture, smoothness) for object recognition. 
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}
+\Huge{\centerline{Thank you!}}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 
